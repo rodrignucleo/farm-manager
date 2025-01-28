@@ -227,6 +227,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             password: passwordValue,
                           ),
                           const SizedBox(height: 10),
+                          // GoogleSignInButton(
+                          //   onPressed: () {},
+                          // ),
+                          // const SizedBox(height: 10),
                           FadeTransition(
                             opacity: _animacaoFade!,
                             child: const Text(
