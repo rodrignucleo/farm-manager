@@ -69,8 +69,12 @@ class AuthService {
             .get();
 
         if (querySnapshot.docs.isNotEmpty) {
+          DocumentSnapshot doc = querySnapshot.docs.first;
           Map<String, dynamic> data =
               querySnapshot.docs.first.data() as Map<String, dynamic>;
+          if (data['id'] == null) {
+            await doc.reference.update({'id': user.uid});
+          }
           Costumer costumer = Costumer.fromMap(data);
           Provider.of<CostumerProvider>(context, listen: false)
               .setCostumer(costumer);
