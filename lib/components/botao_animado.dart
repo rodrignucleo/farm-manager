@@ -1,4 +1,5 @@
 import 'package:farm_manager/homepage/homepage.dart';
+import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -108,10 +109,10 @@ class _LoginButtonState extends State<LoginButton> {
         height: altura.value,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius.value),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [
-              Color(0xFF8C9EFF),
-              Color(0xFF8C9EFF),
+              TAppTheme.appTheme.primaryColor,
+              TAppTheme.appTheme.primaryColor,
             ],
           ),
         ),
@@ -119,14 +120,14 @@ class _LoginButtonState extends State<LoginButton> {
           child: FadeTransition(
             opacity: opacidade,
             child: isLoading
-                ? const SpinKitCircle(
-                    color: Color(0xFF1A237E),
+                ? SpinKitCircle(
+                    color: TAppTheme.appTheme.canvasColor,
                     size: 50.0,
                   )
                 : Text(
                     isLoading ? "Loading" : "Entrar",
-                    style: const TextStyle(
-                      color: Color(0xFF1A237E),
+                    style: TextStyle(
+                      color: TAppTheme.appTheme.canvasColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
