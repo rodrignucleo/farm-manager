@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "201650157860",
+    "project_id": "farm-manager-ha0ij2",
+    "storage_bucket": "farm-manager-ha0ij2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201650157860:android:18f2b0baed0eefd192dbb1",
+        "android_client_info": {
+          "package_name": "com.example.farm_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201650157860-m3sjh3gaei3vrijptpu99dbmber6cn2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmGpPCiWpzr3PLEXGqh2zKbt_bMGHP-ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201650157860-m3sjh3gaei3vrijptpu99dbmber6cn2d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "201650157860-1m70jkd02vn63bfond5jpovamvia6c05.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rodrignucleo.farmmanager"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201650157860:android:45c7fb58d9eb51b292dbb1",
+        "android_client_info": {
+          "package_name": "com.rodrignucleo.farmmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201650157860-gvmc0pvejules7atq2k9bjp4ik0k8863.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rodrignucleo.farmmanager",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "201650157860-m3sjh3gaei3vrijptpu99dbmber6cn2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmGpPCiWpzr3PLEXGqh2zKbt_bMGHP-ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201650157860-m3sjh3gaei3vrijptpu99dbmber6cn2d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "201650157860-1m70jkd02vn63bfond5jpovamvia6c05.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rodrignucleo.farmmanager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
