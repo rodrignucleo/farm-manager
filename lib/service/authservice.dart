@@ -74,7 +74,6 @@ class AuthService {
           Costumer costumer = Costumer.fromMap(data);
           Provider.of<CostumerProvider>(context, listen: false)
               .setCostumer(costumer);
-          debugPrint('Costumer encontrado: $costumer');
         } else {
           debugPrint('Nenhum costumer encontrado com o email ${user.email}');
         }
