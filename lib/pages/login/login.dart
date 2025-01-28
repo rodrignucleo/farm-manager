@@ -1,11 +1,10 @@
 import 'dart:ui';
 
+import 'package:farm_manager/components/botao_animado.dart';
 import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../components/botao_animado.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
