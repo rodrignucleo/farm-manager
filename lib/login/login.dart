@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:farm_manager/components/google_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../components/botao_animado.dart';
@@ -72,10 +72,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromRGBO(20, 24, 27, 1),
-      body: Center(
-        child: Container(
-          width: double.infinity,
+      body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
+        return Container(
+          // width: double.infinity,
           decoration: const BoxDecoration(
               gradient: LinearGradient(
             colors: [
@@ -93,7 +94,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                 animation: _animacaoBlur!,
                 builder: (context, widget) {
                   return SizedBox(
-                    height: 400,
+                    height: isKeyboardVisible ? 200 : 400,
                     child: BackdropFilter(
                       filter: ImageFilter.blur(
                         sigmaX: _animacaoBlur!.value,
@@ -147,111 +148,103 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                   );
                 },
               ),
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 40, right: 40, top: 20),
-                      child: Column(
-                        children: [
-                          AnimatedBuilder(
-                            animation: _animacaoSize!,
-                            builder: (context, widget) {
-                              return Container(
-                                width: _animacaoSize?.value,
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF8C9EFF),
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0xFF8C9EFF),
-                                      blurRadius: 80,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    TextFormField(
-                                      autofillHints: const [
-                                        AutofillHints.email
-                                      ],
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.person),
-                                        labelText: 'Email',
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          emailValue = value;
-                                        });
-                                      },
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Por favor, insira seu email';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    TextFormField(
-                                      obscureText: true,
-                                      autofillHints: const [
-                                        AutofillHints.password
-                                      ],
-                                      decoration: const InputDecoration(
-                                        icon: Icon(Icons.lock),
-                                        labelText: 'Senha',
-                                      ),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          passwordValue = value;
-                                        });
-                                      },
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Por favor, insira sua senha';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          LoginButton(
-                            controller: _controller!,
-                            emailAddress: emailValue,
-                            password: passwordValue,
-                          ),
-                          const SizedBox(height: 10),
-                          GoogleSignInButton(
-                            onPressed: () {},
-                          ),
-                          const SizedBox(height: 10),
-                          FadeTransition(
-                            opacity: _animacaoFade!,
-                            child: const Text(
-                              "Esqueci minha senha",
-                              style: TextStyle(
-                                color: Color(0xFF8C9EFF),
-                                fontWeight: FontWeight.bold,
-                              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 40, right: 40),
+                  child: Column(
+                    children: [
+                      AnimatedBuilder(
+                        animation: _animacaoSize!,
+                        builder: (context, widget) {
+                          return Container(
+                            width: _animacaoSize?.value,
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF8C9EFF),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0xFF8C9EFF),
+                                  blurRadius: 80,
+                                  spreadRadius: 1,
+                                )
+                              ],
                             ),
-                          ),
-                        ],
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  autofillHints: const [AutofillHints.email],
+                                  decoration: const InputDecoration(
+                                    icon: Icon(Icons.person),
+                                    labelText: 'Email',
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      emailValue = value;
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Por favor, insira seu email';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextFormField(
+                                  obscureText: true,
+                                  autofillHints: const [AutofillHints.password],
+                                  decoration: const InputDecoration(
+                                    icon: Icon(Icons.lock),
+                                    labelText: 'Senha',
+                                  ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      passwordValue = value;
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Por favor, insira sua senha';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      LoginButton(
+                        controller: _controller!,
+                        emailAddress: emailValue,
+                        password: passwordValue,
+                      ),
+                      // const SizedBox(height: 10),
+                      // GoogleSignInButton(
+                      //   onPressed: () {},
+                      // ),
+                      const SizedBox(height: 10),
+                      FadeTransition(
+                        opacity: _animacaoFade!,
+                        child: const Text(
+                          "Esqueci minha senha",
+                          style: TextStyle(
+                            color: Color(0xFF8C9EFF),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
