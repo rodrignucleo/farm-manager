@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:farm_manager/components/google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -227,10 +228,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             password: passwordValue,
                           ),
                           const SizedBox(height: 10),
-                          // GoogleSignInButton(
-                          //   onPressed: () {},
-                          // ),
-                          // const SizedBox(height: 10),
+                          GoogleSignInButton(
+                            onPressed: () {},
+                          ),
+                          const SizedBox(height: 10),
                           FadeTransition(
                             opacity: _animacaoFade!,
                             child: const Text(
