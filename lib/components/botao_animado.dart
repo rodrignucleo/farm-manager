@@ -86,7 +86,6 @@ class _LoginButtonState extends State<LoginButton> {
           AuthService authService = AuthService();
           var response = await authService.signInWithEmailAndPassword(
               context, this.widget.emailAddress, this.widget.password);
-          debugPrint(">> response: $response");
           if (response!.toString().contains('invalid-credential')) {
             setState(() {
               errorText = "Senha incorreta";
