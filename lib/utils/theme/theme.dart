@@ -9,6 +9,5 @@ class TAppTheme {
     primaryColor: const Color(0xFF8C9EFF),
     canvasColor: const Color(0xFF1A237E),
     scaffoldBackgroundColor: const Color(0xFF14181B),
-    // scaffoldBackgroundColor: const Color(0xFFFFFFFF)
   );
 }
