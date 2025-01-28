@@ -1,6 +1,5 @@
 import 'package:farm_manager/homepage/homepage.dart';
 import 'package:farm_manager/utils/theme/theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../service/authservice.dart';
@@ -28,6 +27,7 @@ class _LoginButtonState extends State<LoginButton> {
   late Animation<double> opacidade;
 
   bool isLoading = false;
+  String errorText = "";
 
   @override
   void initState() {
@@ -77,63 +77,82 @@ class _LoginButtonState extends State<LoginButton> {
     return InkWell(
       onTap: () async {
         setState(() {
+          errorText = "";
+        });
+        setState(() {
           isLoading = true;
         });
-
         try {
           AuthService authService = AuthService();
-          await authService.signInWithEmailAndPassword(
+          var response = await authService.signInWithEmailAndPassword(
               context, this.widget.emailAddress, this.widget.password);
-          if (context.mounted) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute<void>(
-                builder: (BuildContext context) => const HomePage(),
-              ),
-            );
+          debugPrint(">> response: $response");
+          if (response!.toString().contains('invalid-credential')) {
+            setState(() {
+              errorText = "Senha incorreta";
+            });
+          } else if (response.toString().contains('invalid-email')) {
+            setState(() {
+              errorText = "Email inválido";
+            });
+          } else if (response.toString().contains('channel-error')) {
+            setState(() {
+              errorText = "Digite o email ou senha para continuar!";
+            });
           }
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'user-not-found') {
-            debugPrint('No user found for that email.');
-          } else if (e.code == 'wrong-password') {
-            debugPrint('Wrong password provided for that user.');
+          if (errorText == "") {
+            if (context.mounted) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const HomePage(),
+                ),
+              );
+            }
           }
+        } catch (e) {
+          debugPrint('Error in button login: $e');
         } finally {
           setState(() {
             isLoading = false;
           });
         }
       },
-      child: Container(
-        width: largura.value,
-        height: altura.value,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius.value),
-          gradient: LinearGradient(
-            colors: [
-              TAppTheme.appTheme.primaryColor,
-              TAppTheme.appTheme.primaryColor,
-            ],
+      child: Column(
+        children: [
+          if (errorText != "") Text(errorText),
+          Container(
+            width: largura.value,
+            height: altura.value,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius.value),
+              gradient: LinearGradient(
+                colors: [
+                  TAppTheme.appTheme.primaryColor,
+                  TAppTheme.appTheme.primaryColor,
+                ],
+              ),
+            ),
+            child: Center(
+              child: FadeTransition(
+                opacity: opacidade,
+                child: isLoading
+                    ? SpinKitCircle(
+                        color: TAppTheme.appTheme.canvasColor,
+                        size: 50.0,
+                      )
+                    : Text(
+                        isLoading ? "Loading" : "Entrar",
+                        style: TextStyle(
+                          color: TAppTheme.appTheme.canvasColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+              ),
+            ),
           ),
-        ),
-        child: Center(
-          child: FadeTransition(
-            opacity: opacidade,
-            child: isLoading
-                ? SpinKitCircle(
-                    color: TAppTheme.appTheme.canvasColor,
-                    size: 50.0,
-                  )
-                : Text(
-                    isLoading ? "Loading" : "Entrar",
-                    style: TextStyle(
-                      color: TAppTheme.appTheme.canvasColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-          ),
-        ),
+        ],
       ),
     );
   }

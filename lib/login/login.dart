@@ -1,19 +1,21 @@
 import 'dart:ui';
 
+import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../components/botao_animado.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animacaoBlur;
   Animation<double>? _animacaoFade;
@@ -77,12 +79,12 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
         return Container(
           // width: double.infinity,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
             colors: [
-              Color(0xFF1A237E),
+              TAppTheme.appTheme.canvasColor,
               Color.fromRGBO(20, 24, 27, 1),
-              Color(0xFF8C9EFF),
+              TAppTheme.appTheme.primaryColor,
             ],
             stops: [0, 0.5, 1],
             begin: AlignmentDirectional(-1, -1),
@@ -110,14 +112,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             width: 100,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF8C9EFF),
+                              color: TAppTheme.appTheme.primaryColor,
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(8),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
                               child: Icon(
                                 Icons.animation,
-                                color: Color(0xFF1A237E),
+                                color: TAppTheme.appTheme.canvasColor,
                                 size: 44,
                               ),
                             ),
@@ -126,7 +128,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           Text(
                             'Entrar',
                             style: GoogleFonts.inter(
-                              color: const Color(0xFF8C9EFF),
+                              color: TAppTheme.appTheme.primaryColor,
                               fontSize: 24,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.0,
@@ -136,7 +138,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           Text(
                             'Faça o login abaixo.',
                             style: GoogleFonts.inter(
-                              color: const Color(0xFF8C9EFF),
+                              color: TAppTheme.appTheme.primaryColor,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                               letterSpacing: 0.0,
@@ -161,11 +163,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             width: _animacaoSize?.value,
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF8C9EFF),
+                              color: TAppTheme.appTheme.primaryColor,
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                  color: Color(0xFF8C9EFF),
+                                  color: TAppTheme.appTheme.primaryColor,
                                   blurRadius: 80,
                                   spreadRadius: 1,
                                 )
@@ -185,16 +187,9 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                       emailValue = value;
                                     });
                                   },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Por favor, insira seu email';
-                                    }
-                                    return null;
-                                  },
                                 ),
                                 TextFormField(
                                   obscureText: true,
-                                  autofillHints: const [AutofillHints.password],
                                   decoration: const InputDecoration(
                                     icon: Icon(Icons.lock),
                                     labelText: 'Senha',
@@ -204,12 +199,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                       passwordValue = value;
                                     });
                                   },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Por favor, insira sua senha';
-                                    }
-                                    return null;
-                                  },
                                 ),
                               ],
                             ),
@@ -217,6 +206,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         },
                       ),
                       const SizedBox(height: 20),
+                      // emailValue == ""
+                      //     ? NoDataDialog() :
                       LoginButton(
                         controller: _controller!,
                         emailAddress: emailValue,
@@ -229,10 +220,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       const SizedBox(height: 10),
                       FadeTransition(
                         opacity: _animacaoFade!,
-                        child: const Text(
+                        child: Text(
                           "Esqueci minha senha",
                           style: TextStyle(
-                            color: Color(0xFF8C9EFF),
+                            color: TAppTheme.appTheme.primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -245,6 +236,25 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           ),
         );
       }),
+    );
+  }
+}
+
+class NoDataDialog extends StatelessWidget {
+  final String? emailAddress;
+  final String? password;
+  const NoDataDialog({super.key, this.emailAddress, this.password});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: const Text('Digite seu email!'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'OK'),
+          child: const Text('OK'),
+        ),
+      ],
     );
   }
 }
