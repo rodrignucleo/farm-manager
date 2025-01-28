@@ -52,7 +52,7 @@ class AuthService {
     }
   }
 
-  Future<User?> signInWithEmailAndPassword(
+  Future<Object?> signInWithEmailAndPassword(
       context, String email, String password) async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -81,7 +81,7 @@ class AuthService {
       return user;
     } catch (e) {
       debugPrint("Erro ao fazer login: $e");
-      return null;
+      return e;
     }
   }
 
