@@ -206,8 +206,6 @@ class _LoginPageState extends State<LoginPage>
                         },
                       ),
                       const SizedBox(height: 20),
-                      // emailValue == ""
-                      //     ? NoDataDialog() :
                       LoginButton(
                         controller: _controller!,
                         emailAddress: emailValue,
@@ -236,25 +234,6 @@ class _LoginPageState extends State<LoginPage>
           ),
         );
       }),
-    );
-  }
-}
-
-class NoDataDialog extends StatelessWidget {
-  final String? emailAddress;
-  final String? password;
-  const NoDataDialog({super.key, this.emailAddress, this.password});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: const Text('Digite seu email!'),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.pop(context, 'OK'),
-          child: const Text('OK'),
-        ),
-      ],
     );
   }
 }
