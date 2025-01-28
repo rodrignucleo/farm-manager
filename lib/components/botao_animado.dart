@@ -1,3 +1,4 @@
+import 'package:farm_manager/homepage/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -82,6 +83,14 @@ class _LoginButtonState extends State<LoginButton> {
           AuthService authService = AuthService();
           await authService.signInWithEmailAndPassword(
               context, this.widget.emailAddress, this.widget.password);
+          if (context.mounted) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const HomePage(),
+              ),
+            );
+          }
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             debugPrint('No user found for that email.');
