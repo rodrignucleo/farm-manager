@@ -1,4 +1,5 @@
 import 'package:farm_manager/service/authservice.dart';
+import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +21,7 @@ class GoogleSignInButton extends StatelessWidget {
         debugPrint("user: @$user");
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF8C9EFF),
+        backgroundColor: TAppTheme.appTheme.primaryColor,
         minimumSize: const Size(230, 44),
         padding: const EdgeInsets.all(0),
         shape: RoundedRectangleBorder(
@@ -39,7 +40,7 @@ class GoogleSignInButton extends StatelessWidget {
           Text(
             'Continue with Google',
             style: GoogleFonts.inter(
-              color: const Color(0xFF1A237E),
+              color: TAppTheme.appTheme.canvasColor,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.0,
             ),
