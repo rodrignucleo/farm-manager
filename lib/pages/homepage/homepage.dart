@@ -1,5 +1,7 @@
 import 'package:farm_manager/components/side_bar.dart';
+import 'package:farm_manager/provider/user.dart';
 import 'package:farm_manager/provider/costumer.dart';
+import 'package:farm_manager/service/authservice.dart';
 import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +31,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final costumer = Provider.of<CostumerProvider>(context).costumer;
+    final user = Provider.of<UserProvider>(context).user;
+
+    if (user != null && costumer == null) {
+      AuthService authService = AuthService();
+      authService.setOldUser(context, user);
+    }
 
     return Scaffold(
       key: _key,

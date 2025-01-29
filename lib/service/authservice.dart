@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_manager/model/costumer.dart';
+import 'package:farm_manager/provider/user.dart';
 import 'package:farm_manager/provider/costumer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class AuthService {
           Costumer costumer = Costumer.fromMap(data);
           Provider.of<CostumerProvider>(context, listen: false)
               .setCostumer(costumer);
+          Provider.of<UserProvider>(context, listen: false).setUser(user);
         } else {
           debugPrint('Nenhum costumer encontrado com o email ${user.email}');
         }
@@ -100,6 +102,38 @@ class AuthService {
       await _auth.signOut();
       Provider.of<CostumerProvider>(context, listen: false).clearCostumer();
       debugPrint('Usuário desconectado e estado do costumer limpo.');
+    } catch (e) {
+      debugPrint("Erro ao fazer logout: $e");
+    }
+  }
+
+  Future<void> setOldUser(context, User user) async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    try {
+      QuerySnapshot querySnapshot = await firestore
+          .collection('costumer')
+          .where('email', isEqualTo: user.email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot doc = querySnapshot.docs.first;
+        Map<String, dynamic> data =
+            querySnapshot.docs.first.data() as Map<String, dynamic>;
+        if (data['id'] == null) {
+          await doc.reference.update({'id': user.uid});
+          QuerySnapshot querySnapshotUpdate = await firestore
+              .collection('costumer')
+              .where('email', isEqualTo: user.email)
+              .get();
+          data = querySnapshotUpdate.docs.first.data() as Map<String, dynamic>;
+        }
+        Costumer costumer = Costumer.fromMap(data);
+        Provider.of<CostumerProvider>(context, listen: false)
+            .setCostumer(costumer);
+      } else {
+        debugPrint('Nenhum costumer encontrado com o email ${user.email}');
+      }
     } catch (e) {
       debugPrint("Erro ao fazer logout: $e");
     }
