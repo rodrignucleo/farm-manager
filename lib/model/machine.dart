@@ -34,14 +34,40 @@ class MachineArray {
       'Costumer(frota: $frota, modelo: $modelo, placa: $placa, responsavel: $responsavel)';
 }
 
+class ToolArray {
+  final String componente;
+  final int intervalo;
+
+  ToolArray({
+    required this.componente,
+    required this.intervalo,
+  });
+
+  factory ToolArray.fromMap(Map<String, dynamic> map) {
+    return ToolArray(
+      componente: map['componente'] as String,
+      intervalo: map['intervalo'] as int,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'componente': componente,
+      'intervalo': intervalo,
+    };
+  }
+
+  @override
+  String toString() =>
+      'Costumer(componente: $componente, intervalo: $intervalo)';
+}
+
 class Machine {
   final String costumer;
   final List<MachineArray>? machines;
+  final List<ToolArray>? tools;
 
-  Machine({
-    required this.costumer,
-    this.machines,
-  });
+  Machine({required this.costumer, this.machines, this.tools});
 
   factory Machine.fromMap(Map<String, dynamic> map) {
     return Machine(
@@ -50,6 +76,10 @@ class Machine {
                 ?.map((machine) =>
                     MachineArray.fromMap(machine as Map<String, dynamic>))
                 .toList() ??
+            [],
+        tools: (map['tool'] as List<dynamic>?)
+                ?.map((tool) => ToolArray.fromMap(tool as Map<String, dynamic>))
+                .toList() ??
             []);
   }
 
@@ -57,9 +87,11 @@ class Machine {
     return {
       'costumer': costumer,
       'machines': machines?.map((machine) => machine.toMap()).toList(),
+      'tools': tools?.map((tool) => tool.toMap()).toList(),
     };
   }
 
   @override
-  String toString() => 'Costumer(costumer: $costumer, machines: $machines)';
+  String toString() =>
+      'Costumer(costumer: $costumer, machines: $machines, tools: $tools)';
 }
