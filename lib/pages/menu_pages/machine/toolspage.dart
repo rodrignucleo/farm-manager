@@ -1,5 +1,4 @@
 import 'package:farm_manager/components/side_bar.dart';
-import 'package:farm_manager/pages/menu_pages/machine/machinelistview.dart';
 import 'package:farm_manager/pages/menu_pages/machine/toolspagelistview.dart';
 import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
