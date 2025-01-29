@@ -98,6 +98,10 @@ class _LoginButtonState extends State<LoginButton> {
             setState(() {
               errorText = "Digite o email ou senha para continuar!";
             });
+          } else if (response.toString().contains('missing-password')) {
+            setState(() {
+              errorText = "Digite a senha para continuar!";
+            });
           }
           if (errorText == "") {
             if (context.mounted) {
