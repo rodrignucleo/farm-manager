@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: const Color.fromRGBO(20, 24, 27, 1),
+      backgroundColor: TAppTheme.appTheme.primaryColorDark,
       body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
         return Container(
           // width: double.infinity,
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage>
               gradient: LinearGradient(
             colors: [
               TAppTheme.appTheme.canvasColor,
-              Color.fromRGBO(20, 24, 27, 1),
+              TAppTheme.appTheme.primaryColorDark,
               TAppTheme.appTheme.primaryColor,
             ],
             stops: [0, 0.5, 1],

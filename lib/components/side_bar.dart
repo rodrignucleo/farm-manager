@@ -1,4 +1,6 @@
+import 'package:farm_manager/pages/homepage/homepage.dart';
 import 'package:farm_manager/pages/login/login.dart';
+import 'package:farm_manager/pages/menu_pages/machine/machinepage.dart';
 import 'package:farm_manager/service/authservice.dart';
 import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +87,12 @@ class SideBar extends StatelessWidget {
           icon: Icons.home,
           label: 'Home',
           onTap: () {
-            debugPrint('Home');
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const HomePage(),
+              ),
+            );
           },
         ),
         SidebarXItem(
@@ -99,7 +106,12 @@ class SideBar extends StatelessWidget {
           icon: Icons.minor_crash,
           label: 'Máquinas',
           onTap: () {
-            debugPrint('Máquinas');
+            Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const MachinePage(),
+              ),
+            );
           },
         ),
       ],
