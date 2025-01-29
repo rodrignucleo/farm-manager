@@ -64,9 +64,11 @@ class DefaultFirebaseOptions {
     messagingSenderId: '201650157860',
     projectId: 'farm-manager-ha0ij2',
     storageBucket: 'farm-manager-ha0ij2.firebasestorage.app',
-    androidClientId: '201650157860-gvmc0pvejules7atq2k9bjp4ik0k8863.apps.googleusercontent.com',
-    iosClientId: '201650157860-v8km9377vc8eg7r4c8dlf2ess86s2hlc.apps.googleusercontent.com',
-    iosBundleId: 'com.example.farmManager',
+    androidClientId:
+        '201650157860-gvmc0pvejules7atq2k9bjp4ik0k8863.apps.googleusercontent.com',
+    iosClientId:
+        '201650157860-v8km9377vc8eg7r4c8dlf2ess86s2hlc.apps.googleusercontent.com',
+    iosBundleId: 'com.rodrignucleo.farmManager',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -75,9 +77,11 @@ class DefaultFirebaseOptions {
     messagingSenderId: '201650157860',
     projectId: 'farm-manager-ha0ij2',
     storageBucket: 'farm-manager-ha0ij2.firebasestorage.app',
-    androidClientId: '201650157860-gvmc0pvejules7atq2k9bjp4ik0k8863.apps.googleusercontent.com',
-    iosClientId: '201650157860-v8km9377vc8eg7r4c8dlf2ess86s2hlc.apps.googleusercontent.com',
-    iosBundleId: 'com.example.farmManager',
+    androidClientId:
+        '201650157860-gvmc0pvejules7atq2k9bjp4ik0k8863.apps.googleusercontent.com',
+    iosClientId:
+        '201650157860-v8km9377vc8eg7r4c8dlf2ess86s2hlc.apps.googleusercontent.com',
+    iosBundleId: 'com.rodrignucleo.farmManager',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
@@ -89,5 +93,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'farm-manager-ha0ij2.firebasestorage.app',
     measurementId: 'G-RGG770YLPY',
   );
-
 }
