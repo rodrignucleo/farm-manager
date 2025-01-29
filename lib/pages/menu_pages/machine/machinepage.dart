@@ -38,7 +38,7 @@ class _MachinePageState extends State<MachinePage> {
         onPressed: () {
           if (currentPageIndex == 1) {
             if (context.mounted) {
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute<void>(
                   builder: (BuildContext context) => const ToolsFormPage(),
