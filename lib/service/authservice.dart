@@ -74,6 +74,12 @@ class AuthService {
               querySnapshot.docs.first.data() as Map<String, dynamic>;
           if (data['id'] == null) {
             await doc.reference.update({'id': user.uid});
+            QuerySnapshot querySnapshotUpdate = await firestore
+                .collection('costumer')
+                .where('email', isEqualTo: user.email)
+                .get();
+            data =
+                querySnapshotUpdate.docs.first.data() as Map<String, dynamic>;
           }
           Costumer costumer = Costumer.fromMap(data);
           Provider.of<CostumerProvider>(context, listen: false)
