@@ -1,9 +1,8 @@
 import 'package:farm_manager/components/side_bar.dart';
 import 'package:farm_manager/pages/menu_pages/machine/machinelistview.dart';
-import 'package:farm_manager/provider/costumer.dart';
+import 'package:farm_manager/pages/menu_pages/machine/toolspage.dart';
 import 'package:farm_manager/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 class MachinePage extends StatefulWidget {
@@ -27,11 +26,52 @@ class _MachinePageState extends State<MachinePage> {
   final _controller = SidebarXController(selectedIndex: 2, extended: true);
   final _key = GlobalKey<ScaffoldState>();
 
+  int currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
       drawer: SideBar(controller: _controller),
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(),
+          // );
+        },
+        child: Icon(
+          Icons.add,
+          color: TAppTheme.appTheme.scaffoldBackgroundColor,
+          size: 30,
+        ),
+      ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          navigationBarTheme: TAppTheme.appTheme.navigationBarTheme,
+        ),
+        child: NavigationBar(
+          backgroundColor: TAppTheme.appTheme.scaffoldBackgroundColor,
+          indicatorColor: TAppTheme.appTheme.primaryColor,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          selectedIndex: currentPageIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          destinations: const <Widget>[
+            NavigationDestination(
+              icon: Icon(Icons.minor_crash, color: Color(0xFFFFFFFF)),
+              label: 'Máquinas',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.build, color: Color(0xFFFFFFFF)),
+              label: 'Componentes',
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: TAppTheme.appTheme.scaffoldBackgroundColor,
         automaticallyImplyLeading: true,
@@ -47,12 +87,30 @@ class _MachinePageState extends State<MachinePage> {
         centerTitle: true,
         elevation: 2,
       ),
-      backgroundColor: TAppTheme.appTheme.primaryColorDark,
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(color: TAppTheme.appTheme.primaryColorDark),
-        child: const MachineListView(),
+      backgroundColor: TAppTheme.appTheme.canvasColor,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(color: TAppTheme.appTheme.canvasColor),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+              child: IndexedStack(
+                key: ValueKey<int>(currentPageIndex),
+                index: currentPageIndex,
+                children: const [
+                  MachineListView(),
+                  ToolsPage(),
+                ],
+              ),
+            )),
       ),
     );
   }
