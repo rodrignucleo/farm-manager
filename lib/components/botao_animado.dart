@@ -123,7 +123,12 @@ class _LoginButtonState extends State<LoginButton> {
       },
       child: Column(
         children: [
-          if (errorText != "") Text(errorText),
+          if (errorText != "")
+            Text(errorText,
+                style: TextStyle(
+                  color: TAppTheme.appTheme.disabledColor,
+                  fontWeight: FontWeight.bold,
+                )),
           Container(
             width: largura.value,
             height: altura.value,
@@ -141,13 +146,13 @@ class _LoginButtonState extends State<LoginButton> {
                 opacity: opacidade,
                 child: isLoading
                     ? SpinKitCircle(
-                        color: TAppTheme.appTheme.canvasColor,
+                        color: TAppTheme.appTheme.primaryColorLight,
                         size: 50.0,
                       )
                     : Text(
                         isLoading ? "Loading" : "Entrar",
                         style: TextStyle(
-                          color: TAppTheme.appTheme.canvasColor,
+                          color: TAppTheme.appTheme.primaryColorLight,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

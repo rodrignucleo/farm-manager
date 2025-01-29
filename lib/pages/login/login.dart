@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: TAppTheme.appTheme.primaryColorDark,
+      backgroundColor: TAppTheme.appTheme.scaffoldBackgroundColor,
       body: KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
         return Container(
           // width: double.infinity,
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage>
               gradient: LinearGradient(
             colors: [
               TAppTheme.appTheme.canvasColor,
-              TAppTheme.appTheme.primaryColorDark,
+              TAppTheme.appTheme.scaffoldBackgroundColor,
               TAppTheme.appTheme.primaryColor,
             ],
             stops: [0, 0.5, 1],
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage>
                               padding: const EdgeInsets.all(8),
                               child: Icon(
                                 Icons.animation,
-                                color: TAppTheme.appTheme.canvasColor,
+                                color: TAppTheme.appTheme.primaryColorLight,
                                 size: 44,
                               ),
                             ),
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage>
                           Text(
                             'Entrar',
                             style: GoogleFonts.inter(
-                              color: TAppTheme.appTheme.primaryColor,
+                              color: TAppTheme.appTheme.primaryColorLight,
                               fontSize: 24,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.0,
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage>
                           Text(
                             'Faça o login abaixo.',
                             style: GoogleFonts.inter(
-                              color: TAppTheme.appTheme.primaryColor,
+                              color: TAppTheme.appTheme.primaryColorLight,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                               letterSpacing: 0.0,
@@ -176,8 +176,10 @@ class _LoginPageState extends State<LoginPage>
                               children: [
                                 TextFormField(
                                   autofillHints: const [AutofillHints.email],
-                                  decoration: const InputDecoration(
-                                    icon: Icon(Icons.person),
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.person,
+                                        color: TAppTheme
+                                            .appTheme.primaryColorLight),
                                     labelText: 'Email',
                                   ),
                                   keyboardType: TextInputType.emailAddress,
@@ -189,8 +191,10 @@ class _LoginPageState extends State<LoginPage>
                                 ),
                                 TextFormField(
                                   obscureText: true,
-                                  decoration: const InputDecoration(
-                                    icon: Icon(Icons.lock),
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.lock,
+                                        color: TAppTheme
+                                            .appTheme.primaryColorLight),
                                     labelText: 'Senha',
                                   ),
                                   onChanged: (value) {
@@ -220,7 +224,7 @@ class _LoginPageState extends State<LoginPage>
                         child: Text(
                           "Esqueci minha senha",
                           style: TextStyle(
-                            color: TAppTheme.appTheme.primaryColor,
+                            color: TAppTheme.appTheme.primaryColorLight,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

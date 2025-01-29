@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 2,
       ),
-      backgroundColor: TAppTheme.appTheme.primaryColorDark,
+      backgroundColor: TAppTheme.appTheme.scaffoldBackgroundColor,
       body: Center(
         child: Container(
           height: double.infinity,
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               gradient: LinearGradient(
             colors: [
               TAppTheme.appTheme.canvasColor,
-              TAppTheme.appTheme.primaryColorDark,
+              TAppTheme.appTheme.scaffoldBackgroundColor,
               TAppTheme.appTheme.primaryColor,
             ],
             begin: AlignmentDirectional(-1, -1),
