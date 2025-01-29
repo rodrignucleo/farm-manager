@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage>
                 },
               ),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 40, right: 40),
                   child: Column(
