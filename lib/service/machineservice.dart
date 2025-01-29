@@ -28,4 +28,27 @@ class MachineService {
       return [];
     });
   }
+
+  Stream<List<ToolArray>> fetchToolsData() {
+    User? user = _auth.currentUser;
+
+    if (user == null) {
+      throw Exception("Usuário não está autenticado.");
+    }
+
+    return FirebaseFirestore.instance
+        .collection('machine')
+        .where('costumer', isEqualTo: user.uid)
+        .snapshots()
+        .map((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        var data = snapshot.docs.first.data();
+        var toolList = data['tools'] as List<dynamic>;
+        return toolList
+            .map((tool) => ToolArray.fromMap(tool as Map<String, dynamic>))
+            .toList();
+      }
+      return [];
+    });
+  }
 }
