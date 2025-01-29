@@ -1,4 +1,4 @@
-package com.example.farm_manager
+package com.rodrignucleo.farmmanager
 
 import io.flutter.embedding.android.FlutterActivity
 

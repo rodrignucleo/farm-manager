@@ -60,8 +60,6 @@ dependencies:
   sign_in_with_apple: 6.1.2
   sign_in_with_apple_platform_interface: 1.1.0
   sign_in_with_apple_web: 2.1.0
-  sqflite: 2.3.3+1
-  sqflite_common: 2.5.4+3
   stream_transform: 2.1.0
   timeago: 3.6.1
   url_launcher: 6.3.0
