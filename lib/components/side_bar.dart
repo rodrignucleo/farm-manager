@@ -24,13 +24,13 @@ class SideBar extends StatelessWidget {
           color: TAppTheme.appTheme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(20),
         ),
-        hoverColor: TAppTheme.appTheme.canvasColor,
+        hoverColor: TAppTheme.appTheme.canvasColor.withOpacity(0.10),
         textStyle: TextStyle(
             color: TAppTheme.appTheme.primaryColorLight.withOpacity(0.7)),
         selectedTextStyle:
             TextStyle(color: TAppTheme.appTheme.primaryColorLight),
         hoverTextStyle: TextStyle(
-          color: TAppTheme.appTheme.canvasColor,
+          color: TAppTheme.appTheme.primaryColorLight,
           fontWeight: FontWeight.w500,
         ),
         itemTextPadding: const EdgeInsets.only(left: 30),
